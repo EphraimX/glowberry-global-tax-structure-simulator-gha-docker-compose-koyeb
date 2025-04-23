@@ -8,7 +8,7 @@ import random
 
 app = FastAPI(title="Glowberry Global Tax Structure Simulator API")
 
-# Dummy tax route model
+
 class TaxRoute(BaseModel):
     origin: str
     path: List[str]
@@ -16,16 +16,18 @@ class TaxRoute(BaseModel):
     tags: List[str]
     aggressiveness: str
 
-# Dummy simulation payload
+
 class SimulationRequest(BaseModel):
     user_id: Optional[str] = None
     income: float
     route: List[str]
     timestamp: Optional[str] = None
 
+
 class ReportRequest(BaseModel):
     email: EmailStr
     simulation_id: str
+
 
 @app.get("/api/status")
 def get_status():
@@ -34,6 +36,7 @@ def get_status():
         "uptime": f"{datetime.utcnow()} UTC",
         "version": "0.1.0"
     }
+
 
 @app.get("/api/routes")
 def get_tax_routes():
@@ -56,6 +59,7 @@ def get_tax_routes():
         ]
     }
 
+
 @app.post("/api/simulations/log")
 def log_simulation(request: SimulationRequest):
     simulation_id = str(uuid4())
@@ -67,6 +71,7 @@ def log_simulation(request: SimulationRequest):
         "route": request.route,
         "timestamp": request.timestamp or datetime.utcnow().isoformat()
     }
+
 
 @app.post("/api/report/generate")
 def generate_report(request: SimulationRequest):
@@ -85,12 +90,14 @@ def generate_report(request: SimulationRequest):
         }
     }
 
+
 @app.post("/api/report/send")
 def send_report(request: ReportRequest):
     return {
         "message": f"Simulation report {request.simulation_id} sent to {request.email} (mock)",
         "status": "email_sent"
     }
+
 
 @app.post("/api/auth/signup")
 def signup():
@@ -101,6 +108,7 @@ def signup():
         "status": "account_created"
     }
 
+
 @app.post("/api/auth/login")
 def login():
     token = str(uuid4())
@@ -109,6 +117,7 @@ def login():
         "token": token,
         "expires_in": "3600s"
     }
+
 
 @app.get("/api/routes/user")
 def get_user_routes():
@@ -124,6 +133,7 @@ def get_user_routes():
         ],
         "message": "Loaded user-saved routes (mock)"
     }
+
 
 @app.post("/api/ethics/score")
 def ethics_score(request: SimulationRequest):
