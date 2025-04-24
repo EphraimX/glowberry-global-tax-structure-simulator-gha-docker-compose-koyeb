@@ -144,3 +144,6 @@ def ethics_score(request: SimulationRequest):
         "risk_level": level,
         "message": "Ethics score generated (mock)"
     }
+
+
+# 
