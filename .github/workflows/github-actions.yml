@@ -23,7 +23,10 @@ jobs:
         uses: koyeb/action-git-deploy@v1
         with:
           app-name: glowberry-tax-structure-simulator-github-actions-docker-compose-koyeb
+          service-name: glowberry-tax-structure-simulator-github-actions-docker-compose-koyeb
           service-instance-type: free
+          git-builder: docker
+          git-docker-dockerfile: Dockerfile.koyeb
           service-env: PORT=3000
           service-ports: "3000:http"
           service-routes: "/:3000"
