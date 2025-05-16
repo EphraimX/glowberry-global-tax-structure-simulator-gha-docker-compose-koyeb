@@ -1,4 +1,4 @@
-name: github-actions-docker-compose-fly.io
+name: github-actions-docker-compose-koyeb
 
 on:
   push:
